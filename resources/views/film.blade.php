@@ -16,9 +16,8 @@
     </div>
 
   <div class="container max-w-7xl mx-auto">
-  <div class="grid grid-cols-4 gap-8 px-4 py-4">
 
-       @foreach ($films as $film)
+       {{-- @foreach ($films as $film) --}}
 
             <div class="">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mx-auto">
@@ -30,7 +29,7 @@
                     <p class="text-xs">{{$film->average_rating}} stars | {{$film->created_at->toDateString()}} </p>
                     <p class="py-3">{{ \Illuminate\Support\Str::limit($film->description, 100, $end='...') }}</p>
                         <div class="flex flex-row flex-nowrap py-3">
-                            <a href="{{ url('/films',$film->id)}}"><x-button class="mr-3" style="font-size:10px; padding:7px 12px;">{{ __('View Details') }}</x-button></a>
+                            <x-button class="mr-3" style="font-size:10px; padding:7px 12px;">{{ __('View Details') }}</x-button>
                             <x-button class="mr-3" style="font-size:10px; padding:7px 12px;">{{ __('Add To Cart') }}</x-button>
                         </div>
                         
@@ -38,10 +37,8 @@
                 </div>
             </div>
 
-        @endforeach
+        {{-- @endforeach --}}
 
-    </div>
-  </div>
-    
+    </div>    
     
 </x-app-layout>

@@ -15,7 +15,8 @@ class FilmController extends Controller
      */
     public function index()
     {
-        //
+        $films = Film::get();
+        return $films;
     }
 
     /**
@@ -47,7 +48,8 @@ class FilmController extends Controller
      */
     public function show(Film $film)
     {
-        //
+        $data = ["film" => $film];
+        return view("film", $data);
     }
 
     /**

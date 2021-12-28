@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController; 
+use App\Http\Controllers\FilmController; 
 
 /*
 |--------------------------------------------------------------------------
@@ -23,5 +24,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/films', [FilmController::class, 'show'])->name('film_index');
+Route::get('/films/{film}', [FilmController::class, 'show'])->name('film_show');
+
 
 require __DIR__.'/auth.php';
