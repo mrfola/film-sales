@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController; 
 use App\Http\Controllers\FilmController; 
+use App\Http\Controllers\CartController; 
 
 /*
 |--------------------------------------------------------------------------
@@ -27,5 +28,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/films', [FilmController::class, 'show'])->name('film_index');
 Route::get('/films/{film}', [FilmController::class, 'show'])->name('film_show');
 
+Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('add_to_cart');
+Route::get('/cart', [CartController::class, 'show'])->name('cart_show');
 
 require __DIR__.'/auth.php';

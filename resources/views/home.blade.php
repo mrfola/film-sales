@@ -28,10 +28,35 @@
                     </a>
                     <h2 class="font-black mt-2 text-lg">{{$film->name}}</h2>
                     <p class="text-xs">{{$film->average_rating}} stars | {{$film->created_at->toDateString()}} </p>
+                    <p class="mt-3"><strong>Price:</strong> #{{$film->price}}</p>
                     <p class="py-3">{{ \Illuminate\Support\Str::limit($film->description, 100, $end='...') }}</p>
                         <div class="flex flex-row flex-nowrap py-3">
-                            <a href="{{ url('/films',$film->id)}}"><x-button class="mr-3" style="font-size:10px; padding:7px 12px;">{{ __('View Details') }}</x-button></a>
-                            <x-button class="mr-3" style="font-size:10px; padding:7px 12px;">{{ __('Add To Cart') }}</x-button>
+                            <a href="{{ url('/films',$film->id)}}"><x-button class="mr-3"  style="font-size:0.65em; font-weight:normal; padding: 0.6em 1.5em;">{{ __('View Details') }}</x-button></a>
+                            <?php
+                            $product_in_cart = false;
+
+                            if(session()->has('cart_items'))
+                            {
+                                $cart_items = session('cart_items');
+                                if (in_array($film->id, $cart_items))
+                                { 
+                                    $product_in_cart = true;
+                                }
+
+                            }
+                        ?>
+
+                        @if($product_in_cart == true)
+                        <a href="{{url('/cart')}}">
+                            <x-button  style="font-size:0.6em; font-weight:normal; padding: 0.65em 1.5em;">{{ __('View Cart') }}</x-button><br>
+                        </a>
+                        @else 
+                            <form method="POST" action="/add-to-cart">
+                                @csrf
+                                <input type="hidden" name="film_id" value="{{$film->id}}"/>
+                                <x-button type="submit" class="" style="font-size:0.6em; font-weight:normal; padding: 0.6em 1.5em;" >{{ __('Add To Cart') }}</x-button><br>
+                            </form>
+                        @endif
                         </div>
                         
                     </div>
