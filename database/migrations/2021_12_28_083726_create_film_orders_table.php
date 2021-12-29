@@ -16,7 +16,7 @@ class CreateFilmOrdersTable extends Migration
         Schema::create('film_orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('film_id');
-            $table->foreignId('order_id');
+            $table->foreignId('transaction_id');
             $table->timestamps();
         });
     }

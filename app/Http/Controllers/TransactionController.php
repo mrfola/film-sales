@@ -23,9 +23,40 @@ class TransactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($data)
     {
-        //
+        $email = $data["customer"]["email"];
+        $phone = $data["customer"]["phone_number"];
+        $status = $data["status"];
+        $amount = $data["amount"];
+        $products_array = $data["products_array"];
+        $currency =  $data["currency"];
+        $transaction_ref =  $data["tx_ref"];
+        $first_six_digits = $data["card"]["first_6digits"];
+        $last_four_digits =  $data["card"]["last_4digits"];
+        $created_at =  $data["created_at"];
+      
+        $new_data = 
+        [
+        "user_id" => Auth()->id(),
+        "email" => $email,
+        "phone" => $phone,
+        "status" => $status,
+        "amount" => $amount,
+        "products_array" => $products_array,
+        "currency" => $currency,
+        "transaction_ref" => $transaction_ref,
+        "first_six_digits" => $first_six_digits,
+        "last_four_digits" => $last_four_digits
+        ];
+
+        if(Transaction::create($new_data))
+        {
+            //
+            echo ("<script type='text/javascript'>alert('Payment Successful')</script>");
+            return redirect('home');
+        }
+
     }
 
     /**

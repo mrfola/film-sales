@@ -5,8 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Genre;
-use App\Models\FilmOrder;
-use App\Models\Order;
+use App\Models\Transaction;
 
 class Film extends Model
 {
@@ -17,14 +16,9 @@ class Film extends Model
         return $this->hasMany(Genre::class);
     }
 
-    public function FilmOrders()
+    public function Transaction()
     {
-        return $this->hasMany(FilmOrder::class);
-    }
-
-    public function Orders()
-    {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Transaction::class);
     }
 
 }

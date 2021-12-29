@@ -43,9 +43,9 @@
                                     <?php $total_price = $total_price + $cart_item->price; ?>
 
                                         <tr style="border-bottom-width:1px;">
-                                            <td class="text-left py-2" >{{$index}}</td>
-                                            <td class="text-left" >{{$cart_item->name}}</td>
-                                            <td class="text-left"># {{$cart_item->price}} {{$cart_item->id}}</td>
+                                            <td class="text-left py-2" >{{$index+1}}</td>
+                                        <td class="text-left" >{{$cart_item->name}}</td>
+                                            <td class="text-left"># {{$cart_item->price}}</td>
                                             <td>
                                                 <form method="POST" action="/remove-from-cart">
                                                     @csrf
@@ -56,15 +56,15 @@
                                         </tr>
                                     @endforeach
 
-                                        <tr style="border-bottom-width:1px;">
+                                    <tr style="border-bottom-width:1px;">
                                             <td class="text-left py-2" ></td>
                                             <td class="text-left" ></td>
                                             <td class="text-right py-3 text-lg font-black">Total: #{{$total_price}}</td>
                                             <td>
-                                                <form method="POST" action="/pay">
+                                                <form method="POST" action="/checkout">
                                                     @csrf
-                                                    <input type="hidden" name="array_key" value="{{$index}}"/>
-                                                    <x-button type="submit" class="my-1.5 normal-case" style="font-size:0.8em; font-weight:normal; padding: 0.6em 1.5em;">{{ __('Pay') }}</x-button><br>
+                                                    <input type="hidden" name="total_price" value="{{$total_price}}"/>
+                                                    <x-button type="submit" class="my-1.5 normal-case" style="font-size:0.8em; font-weight:normal; padding: 0.6em 1.5em;">{{ __('Checkout') }}</x-button><br>
                                                 </form>  
                                             </td>
                                         </tr>
