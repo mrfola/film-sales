@@ -20,7 +20,7 @@ class CartController extends Controller
             $request->session()->put('cart_items', $cart_items);//add new film id to cart items in session  
         }
 
-        var_dump($request->session()->get('cart_items'));
+        return redirect(route('cart_show'));
     }
 
     public function show()
@@ -30,5 +30,24 @@ class CartController extends Controller
 
         $data = ["cart_items" => $cart_items];
         return view('cart', $data);
+    }
+
+    public function removeFromCart(Request $request)
+    {
+        $film_id = $request->film_id;
+       
+
+        if($request->session()->has('cart_items'))
+        {
+            $cart_items = $request->session()->get('cart_items');
+
+            if (($key = array_search($film_id, $cart_items)) !== false) {
+                unset($cart_items[$key]);
+            }
+        
+            $request->session()->put('cart_items', $cart_items);
+        }
+
+        return back();
     }
 }

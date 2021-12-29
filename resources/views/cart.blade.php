@@ -24,33 +24,57 @@
                 <h1 class="text-4xl font-black mb-4">Cart</h1>
                 
                 <div style="width:100%">
-                    <table class="table-fixed w-full">
-                        <thead>
-                            <tr class="border-b-2">
-                                <th class="text-left">#</th>
-                                <th class="text-left">Film Name</th>
-                                <th class="text-left">Price</th>
-                            </tr>
-                        </thead>
+                    @if (($cart_items) && (count($cart_items) > 0))
 
-                        <tbody>
-                            <?php $total_price = 0; ?>
-                            @foreach ($cart_items as $index => $cart_item)
-                            <?php $total_price = $total_price + $cart_item->price; ?>
+                        <table class="table-fixed w-full">
+                            <thead>
+                                <tr class="border-b-2">
+                                    <th class="text-left">#</th>
+                                    <th class="text-left">Film Name</th>
+                                    <th class="text-left">Price</th>
+                                    <th class="text-left"></th>
 
-                                <tr style="border-bottom-width:1px;">
-                                    <td class="text-left py-2" >{{$index}}</td>
-                                    <td class="text-left" >{{$cart_item->name}}</td>
-                                    <td class="text-left"># {{$cart_item->price}}</td>
                                 </tr>
-                            @endforeach
-                            <tr style="border-bottom-width:1px;">
-                                <td class="text-left py-2" ></td>
-                                <td class="text-left" ></td>
-                                <td class="text-right py-3 text-lg font-black">Total: #{{$total_price}}</td>
-                            </tr>
-                        </tbody>                        
-                    </table>
+                            </thead>
+
+                            <tbody>
+                                <?php $total_price = 0; ?>
+                                    @foreach ($cart_items as $index => $cart_item)
+                                    <?php $total_price = $total_price + $cart_item->price; ?>
+
+                                        <tr style="border-bottom-width:1px;">
+                                            <td class="text-left py-2" >{{$index}}</td>
+                                            <td class="text-left" >{{$cart_item->name}}</td>
+                                            <td class="text-left"># {{$cart_item->price}} {{$cart_item->id}}</td>
+                                            <td>
+                                                <form method="POST" action="/remove-from-cart">
+                                                    @csrf
+                                                    <input type="hidden" name="film_id" value="{{$cart_item->id}}"/>
+                                                    <x-button type="submit" class="my-1.5 normal-case" style="background: rgb(239 68 68); font-size:0.8em; font-weight:normal; padding: 0.6em 1.5em;">{{ __('Remove') }}</x-button><br>
+                                                </form>  
+                                            </td>
+                                        </tr>
+                                    @endforeach
+
+                                        <tr style="border-bottom-width:1px;">
+                                            <td class="text-left py-2" ></td>
+                                            <td class="text-left" ></td>
+                                            <td class="text-right py-3 text-lg font-black">Total: #{{$total_price}}</td>
+                                            <td>
+                                                <form method="POST" action="/pay">
+                                                    @csrf
+                                                    <input type="hidden" name="array_key" value="{{$index}}"/>
+                                                    <x-button type="submit" class="my-1.5 normal-case" style="font-size:0.8em; font-weight:normal; padding: 0.6em 1.5em;">{{ __('Pay') }}</x-button><br>
+                                                </form>  
+                                            </td>
+                                        </tr>
+                            </tbody>                        
+                        </table>
+
+                    @else
+                        <h2 class="text-2xl font-black mb-4">No Items Have Been Added To Cart</h2>
+                    @endif
+
                 </div>
             </div>
             </div>

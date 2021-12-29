@@ -30,5 +30,6 @@ Route::get('/films/{film}', [FilmController::class, 'show'])->name('film_show');
 
 Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('add_to_cart');
 Route::get('/cart', [CartController::class, 'show'])->name('cart_show');
+Route::post('/remove-from-cart', [CartController::class, 'removeFromCart'])->name('remove_from_cart');
 
 require __DIR__.'/auth.php';
