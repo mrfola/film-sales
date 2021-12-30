@@ -9,7 +9,7 @@ use Apps\Models\Film;
 
 class Transaction extends Model
 {
-    protected $fillable = ["user_id", "email", "phone", "status", "amount", "currency", "transaction_id", "first_six_digits", "last_four_digits"];
+    protected $fillable = ["user_id", "email", "phone", "status", "amount", "currency", "transaction_ref", "first_six_digits", "last_four_digits"];
 
     use HasFactory;
 

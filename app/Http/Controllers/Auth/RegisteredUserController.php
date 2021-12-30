@@ -51,4 +51,37 @@ class RegisteredUserController extends Controller
 
         return redirect(RouteServiceProvider::HOME);
     }
+
+    public function show()
+    {
+        $data = ["user" => Auth()->user()];
+        return view('profile', $data);
+    }
+
+    public function update(Request $request)
+    {   
+        $user = Auth()->user();
+
+        if(isset($request->password))
+        {
+            $request->validate([
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            ]);
+        }
+
+        $user->name = ($request->name != null) ? $request->name : $user->name;
+        $user->email = ($request->email != null) ? $request->email : $user["email"];
+        $user->password = ($request->password != null) ? Hash::make($request->password) : Hash::make('password');
+        $user->address = ($request->address != null) ? $request->address : $user->address;
+        $user->date_of_birth = ($request->date_of_birth != null) ? $request->date_of_birth : $user->date_of_birth;
+        
+        if($user->save())
+        {
+            return back()->with("message", "User updated successfully");
+        }
+        else 
+        {
+            return back()->withErrors(["error" => "An error occured. Please try again."]);
+        }
+    }
 }

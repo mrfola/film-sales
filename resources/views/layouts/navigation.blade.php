@@ -16,6 +16,21 @@
                         {{ __('Home') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('cart_show')" :active="request()->routeIs('cart_show')">
+                        {{ __('Cart') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('user_show')" :active="request()->routeIs('user_show')">
+                        {{ __('Profile') }}
+                    </x-nav-link>
+                </div>
+                {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('orders_show')" :active="request()->routeIs('orders_show')">
+                        {{ __('Previous Orders') }}
+                    </x-nav-link>
+                </div> --}}
             </div>
 
             <!-- Settings Dropdown -->

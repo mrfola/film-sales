@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FilmController; 
 use App\Http\Controllers\CartController; 
 use App\Http\Controllers\PaymentController; 
+use App\Http\Controllers\Auth\RegisteredUserController; 
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,9 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
 
+Route::get('/user', [RegisteredUserController::class, 'show'])->name('user_show');
+Route::patch('/user', [RegisteredUserController::class, 'update'])->name('user_update');
+
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/films', [FilmController::class, 'show'])->name('film_index');
 Route::get('/films/{film}', [FilmController::class, 'show'])->name('film_show');
@@ -37,6 +41,9 @@ Route::post('/checkout', [PaymentController::class, 'show'])->name('checkout');
 Route::post('/pay', [PaymentController::class, 'initialize'])->name('pay');
 // The callback url after a payment
 Route::get('/rave/callback', [PaymentController::class, 'callback'])->name('callback');
+
+Route::get('/orders', [OrderController::class, 'index'])->name('orders_show');
+
 
 });
 

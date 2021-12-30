@@ -12,6 +12,7 @@ class PaymentController extends Controller
         $user = Auth()->user();
         $data =
         [
+        "products_array" => $request->products_array,
         "total_price" => $request->total_price,
         "user" => $user
         ] ;
@@ -39,8 +40,11 @@ class PaymentController extends Controller
             'customer' => [
                 'email' => request()->email,
                 "phone_number" => request()->phone,
-                "name" => request()->name,
-                "products_array" => session('cart_items')
+                "name" => request()->name
+            ],
+            'meta' => [
+                "products_array" => $request->products_array,
+
             ],
 
             "customizations" => [
@@ -71,22 +75,26 @@ class PaymentController extends Controller
 
         //if payment is successful
         if ($status ==  'successful') {
-        
+
         $transactionID = Flutterwave::getTransactionIDFromCallback();
         $data = Flutterwave::verifyTransaction($transactionID);
-
         $transaction = new TransactionController();
         return $transaction->create($data["data"]);
         
         }
         elseif ($status ==  'cancelled')
         {
-            echo (alert('Payment has been cancelled. Please try again'));
+            echo '<script language="javascript">';
+            echo 'alert("Payment has been cancelled. Kindly try again")';
+            echo '</script>';
+            
             redirect(route('checkout'));
         }
         else
         {
-            echo (alert('Payment failed. Kindly try again'));
+            echo '<script language="javascript">';
+            echo 'alert("Payment failed. Kindly try again.")';
+            echo '</script>';
             redirect(route('checkout'));
         }
         // Get the transaction from your DB using the transaction reference (txref)

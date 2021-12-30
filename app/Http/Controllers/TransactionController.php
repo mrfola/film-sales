@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Transaction;
 use App\Http\Requests\StoreTransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
+use App\Http\Controllers\OrderController;
 
 class TransactionController extends Controller
 {
@@ -29,7 +30,7 @@ class TransactionController extends Controller
         $phone = $data["customer"]["phone_number"];
         $status = $data["status"];
         $amount = $data["amount"];
-        $products_array = $data["products_array"];
+        $products_array = $data["meta"]["products_array"];
         $currency =  $data["currency"];
         $transaction_ref =  $data["tx_ref"];
         $first_six_digits = $data["card"]["first_6digits"];
@@ -43,18 +44,28 @@ class TransactionController extends Controller
         "phone" => $phone,
         "status" => $status,
         "amount" => $amount,
-        "products_array" => $products_array,
         "currency" => $currency,
         "transaction_ref" => $transaction_ref,
         "first_six_digits" => $first_six_digits,
         "last_four_digits" => $last_four_digits
         ];
 
-        if(Transaction::create($new_data))
+        $create_transaction = Transaction::create($new_data);
+        if($create_transaction)
         {
-            //
-            echo ("<script type='text/javascript'>alert('Payment Successful')</script>");
-            return redirect('home');
+            $data = array();
+            $data["user_id"] = $new_data["user_id"];
+            $data["total_amount"] = $new_data["amount"];
+            $data["transaction_id"] = $create_transaction->id;
+            $data["products_array"] = $products_array;
+
+            echo '<script language="javascript">';
+            echo 'alert("Payment Successful")';
+            echo '</script>';
+
+             //create order
+             $order = new OrderController();
+             $order->store($data);
         }
 
     }

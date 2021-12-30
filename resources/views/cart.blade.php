@@ -17,7 +17,7 @@
 
   <div class="container max-w-7xl mx-auto">
 
-            <div class="" style="height:80vh;">
+            <div class="" style="min-height:80vh;">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mx-auto">
             <div class="px-6 py-12 bg-white border-b border-gray-200">
 
@@ -63,6 +63,7 @@
                                             <td>
                                                 <form method="POST" action="/checkout">
                                                     @csrf
+                                                    <input type="hidden" name="products_array" value="{{json_encode($cart_items)}}"/>
                                                     <input type="hidden" name="total_price" value="{{$total_price}}"/>
                                                     <x-button type="submit" class="my-1.5 normal-case" style="font-size:0.8em; font-weight:normal; padding: 0.6em 1.5em;">{{ __('Checkout') }}</x-button><br>
                                                 </form>  

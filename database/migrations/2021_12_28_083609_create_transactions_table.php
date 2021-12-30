@@ -20,9 +20,8 @@ class CreateTransactionsTable extends Migration
             $table->string('phone');//is because a user can decide to use a different email and phone number for that particular transaction for whatever reason, so it essential it is stored
             $table->string('status');
             $table->integer('amount');
-            $table->text('products_array');
             $table->string('currency');
-            $table->string('transaction_id');
+            $table->string('transaction_ref');
             $table->string('first_six_digits');
             $table->string('last_four_digits');
             $table->timestamps();
