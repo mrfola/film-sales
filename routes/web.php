@@ -6,6 +6,7 @@ use App\Http\Controllers\FilmController;
 use App\Http\Controllers\CartController; 
 use App\Http\Controllers\PaymentController; 
 use App\Http\Controllers\Auth\RegisteredUserController; 
+use App\Http\Controllers\OrderController; 
 
 /*
 |--------------------------------------------------------------------------
@@ -42,7 +43,7 @@ Route::post('/pay', [PaymentController::class, 'initialize'])->name('pay');
 // The callback url after a payment
 Route::get('/rave/callback', [PaymentController::class, 'callback'])->name('callback');
 
-Route::get('/orders', [OrderController::class, 'index'])->name('orders_show');
+Route::get('/orders', [OrderController::class, 'index'])->name('orders_index');
 
 
 });

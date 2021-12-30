@@ -65,7 +65,7 @@ class TransactionController extends Controller
 
              //create order
              $order = new OrderController();
-             $order->store($data);
+             return $order->store($data);
         }
 
     }

@@ -26,11 +26,11 @@
                         {{ __('Profile') }}
                     </x-nav-link>
                 </div>
-                {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('orders_show')" :active="request()->routeIs('orders_show')">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('orders_index')" :active="request()->routeIs('orders_index')">
                         {{ __('Previous Orders') }}
                     </x-nav-link>
-                </div> --}}
+                </div>
             </div>
 
             <!-- Settings Dropdown -->

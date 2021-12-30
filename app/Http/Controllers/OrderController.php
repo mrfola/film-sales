@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
-use App\Http\Controllers\OrderItem;
+use App\Models\OrderItem;
+use App\Models\Film;
 
 class OrderController extends Controller
 {
@@ -16,10 +17,28 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $order_items = OrderItem::where('id', Auth()->id())->all();
-        $data = ["order_items" => $order_item];
+        $user = Auth()->user();
+        $orders = $user->orders()->get();
+        // dd($orders[9]);
+        $previous_orders = []; //previous orders array initialized as empty
 
-        return view('past_orders', $data);
+        foreach($orders as $order)
+        {
+            $order_items = $order->orderItems()->get();  
+            
+            if(count($order_items)>0)
+            {
+                foreach($order_items as $order_item)
+                {
+                    $order_item["name"] = Film::where('id', $order_item["id"])->first()->name;
+                    $previous_orders[] = $order_item;
+                }
+            }
+        }
+
+         $data = ["orders" => $previous_orders];
+
+         return view('past_orders', $data);
     }
 
     /**

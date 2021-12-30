@@ -44,7 +44,7 @@
                                             <td class="text-left py-2" >{{$index+1}}</td>
                                             <td class="text-left" >{{$order->name}}</td>
                                             <td class="text-left"># {{$order->price}}</td>
-                                            <td class="text-left">{{$order->date}}</td>
+                                            <td class="text-left">{{$order->created_at}}</td>
                                             </td>
                                         </tr>
                                     @endforeach

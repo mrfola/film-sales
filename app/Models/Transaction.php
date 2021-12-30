@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use Apps\Models\Film;
+use Apps\Models\Order;
 
 class Transaction extends Model
 {
@@ -13,13 +14,18 @@ class Transaction extends Model
 
     use HasFactory;
 
-    public function User()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function Film()
+    public function film()
     {
         return $this->hasMany(Film::class);
+    }
+
+    public function order()
+    {
+        return $this->hasOne(Order::class);
     }
 }
