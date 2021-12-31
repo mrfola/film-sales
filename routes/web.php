@@ -7,6 +7,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\PaymentController; 
 use App\Http\Controllers\Auth\RegisteredUserController; 
 use App\Http\Controllers\OrderController; 
+use App\Http\Controllers\Admin\AdminHomeController; 
 
 /*
 |--------------------------------------------------------------------------
@@ -45,7 +46,15 @@ Route::get('/rave/callback', [PaymentController::class, 'callback'])->name('call
 
 Route::get('/orders', [OrderController::class, 'index'])->name('orders_index');
 
+});
+
+Route::middleware('admin_auth:admin')->group(function () {
+
+
+//admin routes
+Route::get('/admin/home', [AdminHomeController::class, 'index'])->name('admin_home');
 
 });
 
 require __DIR__.'/auth.php';
+require __DIR__.'/admin_auth.php';
