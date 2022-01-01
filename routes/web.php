@@ -8,6 +8,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Auth\RegisteredUserController; 
 use App\Http\Controllers\OrderController; 
 use App\Http\Controllers\Admin\AdminHomeController; 
+use App\Http\Controllers\Admin\AdminFilmController; 
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +54,9 @@ Route::middleware('admin_auth:admin')->group(function () {
 
 //admin routes
 Route::get('/admin/home', [AdminHomeController::class, 'index'])->name('admin_home');
+Route::get('/admin/films/{film}', [AdminFilmController::class, 'show'])->name('film_create');
+Route::patch('/admin/films/{film}', [AdminFilmController::class, 'update'])->name('film_update');
+Route::delete('/admin/films/{film}', [AdminFilmController::class, 'destroy'])->name('film_delete');
 
 });
 

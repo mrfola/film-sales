@@ -10,11 +10,12 @@ use App\Models\OrderItem;
 
 class Film extends Model
 {
+    protected $fillable=["name", "description", "genre_id", "rating", "price"];
     use HasFactory;
 
-    public function genres()
+    public function genre()
     {
-        return $this->hasMany(Genre::class);
+        return $this->belongsTo(Genre::class, 'genre_id');
     }
 
     public function transaction()

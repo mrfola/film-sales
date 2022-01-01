@@ -20,6 +20,8 @@
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mx-auto">
     <div class="px-6 py-12 bg-white border-b border-gray-200">
             <h3 class="text-center text-4xl ">Profile</h3>
+
+            <!-- message -->
             <p class="text-center">{{session()->get('message')}}</p>
              <!-- Validation Errors -->
             <x-auth-validation-errors class="mb-4" :errors="$errors" />
