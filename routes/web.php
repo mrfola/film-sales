@@ -49,10 +49,12 @@ Route::get('/orders', [OrderController::class, 'index'])->name('orders_index');
 
 });
 
+
+
 //admin routes
 Route::middleware('admin_auth:admin')->group(function () 
 {
-
+    
 Route::get('/admin/home', [AdminHomeController::class, 'index'])->name('admin_home');
 
 Route::get('/admin/films', [AdminFilmController::class, 'create'])->name('film_create');

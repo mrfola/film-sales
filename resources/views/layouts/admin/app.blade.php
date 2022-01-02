@@ -7,31 +7,30 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
-        <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
-
-        <!-- Styles -->
+        <!-- Tailwind is included -->
+        <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-        <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
-    </head>
-    <body class="font-sans antialiased">
-        <div class="bg-gray-100">
-            @include('layouts.admin.navigation')
 
-            <!-- Page Heading -->
-            <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                        {{ isset($header) ? $header : "FilmSales Admin"}}
-                    </h2>
-                </div>
-            </header>
+        <!-- Scripts below are for demo only -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+        <script type="text/javascript" src="{{ asset('assets/js/chart.sample.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('assets/js/main.min.js') }}"></script>
+        
+        <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.9.95/css/materialdesignicons.min.css">
+    </head>
+
+    <body class="font-sans antialiased">
+        <div  class="bg-gray-100" id="app">
+
+            <!-- Navigation -->
+            @include('layouts.admin.navigation')
+            
 
             <!-- Page Content -->
             <main>
                 {{ $slot }}
             </main>
-        </div>
+
+            </div>
     </body>
 </html>

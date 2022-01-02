@@ -1,10 +1,14 @@
 <x-admin.app-layout>
 
     <x-admin.top-bar/>
+    <x-admin.sidebar/>
+
+
+    @include('admin.dashboard_statistics')
 
   <div class="container max-w-7xl mx-auto">
 
-            <div class="" style="min-height:80vh;">
+            <div class="card-content" style="min-height:80vh;">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mx-auto">
             <div class="px-6 py-12 bg-white border-b border-gray-200">
                 <!-- message -->
