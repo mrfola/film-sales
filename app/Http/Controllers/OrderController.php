@@ -91,8 +91,8 @@ class OrderController extends Controller
             }
 
             //remove order from session
-            session()->flush();
-            return redirect(route('orders_show'));
+            session()->forget("cart_items");
+            return redirect(route('orders_index'));
         }
     }
 

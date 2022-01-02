@@ -19,7 +19,7 @@ class CreateFilmsTable extends Migration
             $table->text('description');
             $table->integer('price');
             $table->foreignId('genre_id');
-            $table->float('average_rating');
+            $table->float('average_rating')->default(0);
             $table->timestamps();
         });
     }

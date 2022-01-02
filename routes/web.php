@@ -49,14 +49,19 @@ Route::get('/orders', [OrderController::class, 'index'])->name('orders_index');
 
 });
 
-Route::middleware('admin_auth:admin')->group(function () {
-
-
 //admin routes
+Route::middleware('admin_auth:admin')->group(function () 
+{
+
 Route::get('/admin/home', [AdminHomeController::class, 'index'])->name('admin_home');
-Route::get('/admin/films/{film}', [AdminFilmController::class, 'show'])->name('film_create');
+
+Route::get('/admin/films', [AdminFilmController::class, 'create'])->name('film_create');
+Route::post('/admin/films', [AdminFilmController::class, 'store'])->name('film_store');
+Route::get('/admin/films/{film}', [AdminFilmController::class, 'show'])->name('film_show');
 Route::patch('/admin/films/{film}', [AdminFilmController::class, 'update'])->name('film_update');
 Route::delete('/admin/films/{film}', [AdminFilmController::class, 'destroy'])->name('film_delete');
+
+Route::get('/admin/report', [AdminFilmController::class, 'report'])->name('film_report');
 
 });
 

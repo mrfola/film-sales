@@ -1,19 +1,6 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('FilmSales') }}
-        </h2>
-    </x-slot>
+<x-admin.app-layout>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    <a href="{{ url()->previous() }}" class="text-sky-600 font-black">< Back</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    <x-admin.top-bar/>
 
   <div class="container max-w-7xl mx-auto">
 
@@ -41,21 +28,7 @@
                             </thead>
                             <tbody>
                                     @foreach ($films as $index => $film)
-
-                                        <tr style="border-bottom-width:1px;">
-                                            <td class="text-left py-2" >{{$index+1}}</td>
-                                            <td class="text-left" >{{$film->name}}</td>
-                                            <td class="text-left"># {{$film->price}}</td>
-                                            <td class="text-left"><?php // $genre = $film->genre()->first()->name; ?></td>
-                                            <td class="text-left">{{$film->average_rating}}</td>
-
-                                            <td>
-                                                <a href="/admin/films/{{$film->id}}">
-                                                    <x-button class="my-1.5 normal-case" style="background: #146AB5; font-size:0.8em; font-weight:normal; padding: 0.6em 1.5em;">
-                                                        {{ __('View') }}
-                                                    </x-button><br>
-                                            </td>
-                                        </tr>
+                                        @include('admin.film_row')
                                     @endforeach
                             </tbody>                        
                         </table>
@@ -70,5 +43,5 @@
             </div>
     </div>
     
-</x-app-layout>
+</x-admin.app-layout>
 

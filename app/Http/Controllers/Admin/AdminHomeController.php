@@ -17,7 +17,7 @@ class AdminHomeController extends Controller
 
     public function index()
     {
-        $film = Film::get();
+        $film = Film::orderBy('id', 'DESC')->get();
         $data = ["films" => $film];
         return view('admin.home', $data);
     }
