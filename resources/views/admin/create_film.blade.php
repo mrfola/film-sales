@@ -1,6 +1,7 @@
 <x-admin.app-layout>
 
     <x-admin.top-bar/>
+    <x-admin.sidebar/>
 
     <div class="container max-w-7xl mx-auto">
 

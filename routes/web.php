@@ -72,8 +72,6 @@ Route::post('/admin/users', [AdminUserController::class, 'index'])->name('filter
 Route::get('/admin/genres', [AdminGenreController::class, 'index'])->name('genres_index');
 Route::get('/admin/genres/{genre}', [AdminGenreController::class, 'show'])->name('genres_show');
 
-Route::get('/admin/report', [AdminFilmController::class, 'report'])->name('film_report');
-
 });
 
 require __DIR__.'/auth.php';
