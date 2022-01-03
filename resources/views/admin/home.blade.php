@@ -14,7 +14,30 @@
                 <!-- message -->
                 <p class="text-center">{{session()->get('message')}}</p>
 
-                <h1 class="text-4xl font-black mb-4">Film List</h1>
+                <div class="flex flex-row flex-nowrap gap-10 pt-6">
+                    <div class="basis-1/5">
+                        <h1 class="text-4xl font-black mb-4">Film List</h1>
+                    </div>
+
+                    <div class="basis-4/5">
+                        <form method="POST" action="{{route('filter_admin_home')}}" class="float:right;">
+                            @csrf
+
+                            <div class="flex flex-row flex-nowrap">    
+                                <x-select id="filter_type" name="filter_type" type="text" autofocus>
+                                    <option value="STARTS_WITH">Films that start with</option>
+                                    <option value="ENDS_WITH">Films that end with</option>
+                                </x-select>
+
+                                <x-input class="block mt-1 w-full ml-4" id="filter_text" type="text" min="1" max="1" placeholder="E.g Ultron"  name="filter_text" autofocus />
+                                
+                                <x-button type="submit" class="ml-4 my-1.5 normal-case" style="background: #0284C7; font-size:0.9em; font-weight:normal; padding: 0.6em 1.5em;">
+                                    {{ __('Search') }}
+                                </x-button><br>
+                            </div>                           
+                        </form>  
+                    </div>
+                </div>
                 
                 <div style="width:100%">
                     @if (($films) && (count($films) > 0))

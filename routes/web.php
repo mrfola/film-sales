@@ -9,6 +9,8 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\OrderController; 
 use App\Http\Controllers\Admin\AdminHomeController; 
 use App\Http\Controllers\Admin\AdminFilmController; 
+use App\Http\Controllers\Admin\AdminUserController; 
+use App\Http\Controllers\Admin\AdminGenreController; 
 
 /*
 |--------------------------------------------------------------------------
@@ -56,12 +58,19 @@ Route::middleware('admin_auth:admin')->group(function ()
 {
     
 Route::get('/admin/home', [AdminHomeController::class, 'index'])->name('admin_home');
+Route::post('/admin/home', [AdminHomeController::class, 'index'])->name('filter_admin_home');
 
 Route::get('/admin/films', [AdminFilmController::class, 'create'])->name('film_create');
 Route::post('/admin/films', [AdminFilmController::class, 'store'])->name('film_store');
 Route::get('/admin/films/{film}', [AdminFilmController::class, 'show'])->name('film_show');
 Route::patch('/admin/films/{film}', [AdminFilmController::class, 'update'])->name('film_update');
 Route::delete('/admin/films/{film}', [AdminFilmController::class, 'destroy'])->name('film_delete');
+
+Route::get('/admin/users', [AdminUserController::class, 'index'])->name('users_index');
+Route::post('/admin/users', [AdminUserController::class, 'index'])->name('filter_users_index');
+
+Route::get('/admin/genres', [AdminGenreController::class, 'index'])->name('genres_index');
+Route::get('/admin/genres/{genre}', [AdminGenreController::class, 'show'])->name('genres_show');
 
 Route::get('/admin/report', [AdminFilmController::class, 'report'])->name('film_report');
 

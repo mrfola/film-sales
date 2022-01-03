@@ -7,32 +7,32 @@
     <div class="menu is-menu-main">
       <ul class="menu-list">
         <li class="active">
-          <a href="#">
+          <a href="{{route('admin_home')}}">
             <span class="icon"><i class="mdi mdi-desktop-mac"></i></span>
             <span class="menu-item-label">Dashboard</span>
           </a>
         </li>
 
         <li>
-          <a href="#">
+          <a href="{{route('users_index')}}">
             <span class="icon"><i class="mdi mdi-account-circle"></i></span>
             <span class="menu-item-label">Users</span>
           </a>
         </li>
 
         <li>
-          <a href="#">
+          <a href="{{route('genres_index')}}">
             <span class="icon"><i class="mdi mdi-view-list"></i></span>
             <span class="menu-item-label">Genre</span>
           </a>
         </li>
-
+{{-- 
         <li>
           <a href="#">
-            <span class="icon"><i class="mdi mdi mdi-coin"></i></span>
+            <span class="icon"><i class="mdi mdi-coin"></i></span>
             <span class="menu-item-label">Transactions</span>
           </a>
-        </li>
+        </li> --}}
 
       </ul>
     </div>

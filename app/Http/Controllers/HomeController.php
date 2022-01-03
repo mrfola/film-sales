@@ -16,9 +16,7 @@ class HomeController extends Controller
     public function index()
     {
         $film = new FilmController();
-        $data = ["films" => $film->index()];
-        //var_dump($data);
-        
+        $data = ["films" => $film->index()];        
         return view('home', $data);
     }
 }

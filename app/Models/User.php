@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Order;
 use App\Models\Transaction;
+use Illuminate\Support\Carbon;
 
 class User extends Authenticatable
 {
@@ -56,4 +57,55 @@ class User extends Authenticatable
         return $this->hasMany(Transaction::class);
     }
 
+    public function lastFilmBought()
+    {
+        if(($this->orders()->orderBy('id', 'DESC')->first()) != null)
+        {
+            $last_order = $this->orders()->orderBy('id', 'DESC')->first();
+            $last_order_item = $last_order->orderItems('id', 'DESC')->get()->first();
+            $last_film = $last_order_item->film()->first()->name;
+
+            return $last_film;
+        }else 
+        {
+           return "No film bought yet";
+        }
+    }
+
+    public function getAge()
+    {
+        if(isset($this->date_of_birth))
+        {
+            $DOB = Carbon::parse($this->date_of_birth);
+            $currentDate = Carbon::now();
+            $age = $DOB->diffInYears($currentDate);
+
+            return $age;
+
+        }else
+        {
+            return "Record not available";
+        }
+    }
+
+    public function noOfPurchases()
+    {
+        $orders = $this->orders()->get();
+        if(count($orders) <= 0)
+        {
+            return "No film bought yet";
+
+        }else 
+        {
+           $no_of_purchases = 0;
+
+           foreach ($orders as $order)
+           {
+               $no_of_order_items = $order->orderItems()->get()->count();
+               $no_of_purchases = $no_of_purchases + $no_of_order_items;
+           }
+
+           return $no_of_purchases;
+        }
+    }
 }

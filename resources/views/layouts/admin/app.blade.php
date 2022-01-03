@@ -25,7 +25,6 @@
             <!-- Navigation -->
             @include('layouts.admin.navigation')
             
-
             <!-- Page Content -->
             <main>
                 {{ $slot }}

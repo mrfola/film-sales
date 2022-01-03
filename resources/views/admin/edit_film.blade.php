@@ -22,7 +22,7 @@
                             <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
                             <!-- Update Film Form -->
-                            @include('admin.film_update_form');
+                            @include('admin.film_update_form')
 
                             <!-- Delete Film -->
                             <form method="POST" action="/admin/films/{{$film->id}}" class="float:right;">
